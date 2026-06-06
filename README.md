@@ -23,3 +23,10 @@ Then open Warp and run `nvim` once — LazyVim will install plugins on first lau
 ## Components
 
 See `docs/superpowers/specs/2026-06-06-warp-lazyvim-tui-env-design.md` for the architecture.
+
+## Verification
+
+Last verified on 2026-06-06 on macOS (Apple Silicon).
+Acceptance checklist (see `docs/superpowers/plans/...`) passed:
+starship prompt, zsh-autosuggestions, atuin history search, zoxide,
+eza/bat, git-delta, lazygit, LazyVim + telescope, mise, `chezmoi verify`.
