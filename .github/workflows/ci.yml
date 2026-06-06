@@ -1,0 +1,60 @@
+name: dotfiles CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck and zsh
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck zsh
+
+      - name: shellcheck
+        run: |
+          find . -type f \( -name '*.sh' -o -name 'run_once_*' \) \
+            -not -path './dot_config/nvim/*' -print0 \
+            | xargs -0 -r shellcheck --shell=bash || true
+          # SC1083 (Go template false-positive) is acceptable; we fail only on errors below
+          find . -type f \( -name '*.sh' -o -name 'run_once_*' \) \
+            -not -path './dot_config/nvim/*' -print0 \
+            | xargs -0 -r shellcheck --shell=bash --exclude=SC1083
+
+      - name: zsh -n dot_zshrc
+        run: zsh -n dot_zshrc
+
+  apply-dry-run-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: dotfiles
+
+      - name: Install chezmoi
+        run: brew install chezmoi
+
+      - name: Provide chezmoi config non-interactively
+        run: |
+          mkdir -p ~/.config/chezmoi
+          cat > ~/.config/chezmoi/chezmoi.toml <<EOF
+          sourceDir = "$PWD/dotfiles"
+
+          [data]
+              name = "CI"
+              email = "ci@example.com"
+              github_user = "ci-bot"
+              is_work_machine = false
+          EOF
+
+      - name: chezmoi init from local source
+        run: chezmoi init
+
+      - name: chezmoi diff
+        run: chezmoi diff || true
+
+      - name: chezmoi apply --dry-run
+        run: chezmoi apply --dry-run --verbose
