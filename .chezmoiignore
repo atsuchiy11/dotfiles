@@ -2,12 +2,9 @@
 README.md
 docs/
 .github/
+Brewfile
+justfile
 
 # OS / editor noise
 *.swp
 .DS_Store
-
-# Platform-specific
-{{ if ne .chezmoi.os "darwin" }}
-Brewfile
-{{ end }}
