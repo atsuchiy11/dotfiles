@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir -p ~/.config/chezmoi
           cat > ~/.config/chezmoi/chezmoi.toml <<EOF
-          sourceDir = "$PWD/dotfiles"
+          sourceDir = "$GITHUB_WORKSPACE/dotfiles"
 
           [data]
               name = "CI"
@@ -49,12 +49,14 @@ jobs:
               github_user = "ci-bot"
               is_work_machine = false
           EOF
+          echo "--- chezmoi.toml ---"
+          cat ~/.config/chezmoi/chezmoi.toml
 
-      - name: chezmoi init from local source
-        run: chezmoi init
+      - name: chezmoi managed (verify config picked up)
+        run: chezmoi managed | head -10
 
       - name: chezmoi diff
-        run: chezmoi diff || true
+        run: chezmoi diff
 
       - name: chezmoi apply --dry-run
         run: chezmoi apply --dry-run --verbose
