@@ -1,0 +1,45 @@
+# starship: cross-shell prompt
+# https://starship.rs/config/
+
+add_newline = true
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$golang\
+$python\
+$rust\
+$cmd_duration\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+style = "yellow"
+
+[cmd_duration]
+min_time = 2000
+format = "took [$duration](bold yellow) "
+
+[nodejs]
+format = "via [⬢ $version](bold green) "
+
+[golang]
+format = "via [🐹 $version](bold cyan) "
+
+[python]
+format = "via [🐍 $version](bold yellow) "
