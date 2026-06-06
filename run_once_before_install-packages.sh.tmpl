@@ -1,0 +1,33 @@
+#!/bin/bash
+# Bootstrap script run by chezmoi on first apply (and re-run when this file changes).
+# Sets up Homebrew, runs brew bundle, and triggers mise install if a config exists.
+
+set -euo pipefail
+
+echo "▶ chezmoi bootstrap: starting"
+
+# ① Homebrew
+if ! command -v brew >/dev/null 2>&1; then
+  echo "▶ Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Activate brew for the current shell (Apple Silicon or Intel)
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# ② Brewfile bundle
+echo "▶ brew bundle (Brewfile)"
+brew bundle --file={{ .chezmoi.sourceDir }}/Brewfile
+
+# ③ mise install (config がある場合のみ)
+if command -v mise >/dev/null 2>&1 && [ -f "$HOME/.config/mise/config.toml" ]; then
+  echo "▶ mise install"
+  mise install
+fi
+
+echo "✅ bootstrap done."
+echo "   Next: open Warp and run 'nvim' once to let LazyVim install plugins."
