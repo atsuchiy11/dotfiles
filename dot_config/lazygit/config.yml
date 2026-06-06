@@ -1,0 +1,20 @@
+gui:
+  showFileTree: true
+  showRandomTip: false
+  theme:
+    lightTheme: false
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - white
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never --line-numbers --side-by-side=false
+  overrideGpg: false
+
+keybinding:
+  universal:
+    quit: q
