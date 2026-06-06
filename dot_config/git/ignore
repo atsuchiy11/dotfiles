@@ -1,0 +1,24 @@
+# システムファイル
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 環境変数
+.env
+.envrc
+
+# パッケージファイル
+node_modules/
+bower_components/
+.venv/
+vendor/
+.bundle/
+
+# ログとキャッシュ
+*.log
+*.cache
+*.tmp
+log/
+
+# Python
+.mypy_cache/

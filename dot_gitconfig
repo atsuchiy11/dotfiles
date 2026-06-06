@@ -1,0 +1,17 @@
+[user]
+	name = Atsushi Tsuchiya
+	email = atsuchiy11@gmail.com
+[init]
+	defaultBranch = main
+[ghq]
+	root = ~/.ghq
+[core]
+	excludesfile = /Users/tsuchiyaatsushishi/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/tsuchiyaatsushishi/.stCommitMsg
