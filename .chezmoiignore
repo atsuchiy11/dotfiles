@@ -1,0 +1,13 @@
+# Repository docs and meta — keep in git, don't apply to ~/
+README.md
+docs/
+.github/
+
+# OS / editor noise
+*.swp
+.DS_Store
+
+# Platform-specific
+{{ if ne .chezmoi.os "darwin" }}
+Brewfile
+{{ end }}
