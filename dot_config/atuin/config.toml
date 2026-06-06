@@ -1,0 +1,22 @@
+# atuin: SQLite-backed shell history search
+# https://docs.atuin.sh/configuration/config/
+
+# Compact UI for inline mode
+style = "compact"
+
+# Height (in lines) of the inline search UI
+inline_height = 20
+
+# Search all history globally by default (not just current session)
+filter_mode = "global"
+
+# Search algorithm
+search_mode = "fuzzy"
+
+# Stay offline by default (no atuin server account)
+auto_sync = false
+update_check = false
+
+# When you press Enter on a result, just place the command on the prompt
+# (don't auto-execute) so you can review before running
+enter_accept = false
