@@ -7,6 +7,18 @@
 	root = ~/.ghq
 [core]
 	excludesfile = /Users/tsuchiyaatsushishi/.gitignore_global
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	light = false
+	side-by-side = false
+	line-numbers = true
+[merge]
+	conflictStyle = diff3
+[diff]
+	colorMoved = default
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
