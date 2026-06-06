@@ -1,0 +1,10 @@
+{{- $name := promptStringOnce . "name" "Your full name" -}}
+{{- $email := promptStringOnce . "email" "Your email" -}}
+{{- $githubUser := promptStringOnce . "github_user" "Your GitHub username" -}}
+{{- $isWork := promptBoolOnce . "is_work_machine" "Is this a work machine?" false -}}
+
+[data]
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}
+    github_user = {{ $githubUser | quote }}
+    is_work_machine = {{ $isWork }}
